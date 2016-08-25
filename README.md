@@ -1,0 +1,2 @@
+# isichazamazwi
+Linux dictionary 
