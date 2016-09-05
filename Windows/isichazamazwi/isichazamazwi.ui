@@ -53,6 +53,13 @@
     <property name="text">
      <string>Translate</string>
     </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../Files/ico.jpg</normaloff>../../Files/ico.jpg</iconset>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QLineEdit" name="txt_source">
     <property name="geometry">
