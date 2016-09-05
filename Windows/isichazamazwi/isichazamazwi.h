@@ -15,6 +15,9 @@ public:
     explicit isichazamazwi(QWidget *parent = 0);
     ~isichazamazwi();
 
+private slots:
+    void on_btn_translate_clicked();
+
 private:
     Ui::isichazamazwi *ui;
 };
