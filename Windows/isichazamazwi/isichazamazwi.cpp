@@ -14,13 +14,24 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
     ui(new Ui::isichazamazwi)
 {
     ui->setupUi(this);
+    ui->rbtn_google->setChecked(true);
+
+    //ui->menuTranslator->addAction(tr("&Ask question"),this, SLOT(askQuestion()), tr("Alt+A"));
+
+    ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
 }
 
 isichazamazwi::~isichazamazwi()
 {
     delete ui;
 }
-QString send_http_request(QString source){
+void isichazamazwi::exit()
+{
+    close();
+    qApp->quit();
+}
+
+QString send_http_request(QString source,int type){
 
     QString ans;
     //QString src = QString("http://tureng.com/tr/turkce-ingilizce/") + source;
@@ -58,14 +69,24 @@ QString parse_http(QString &src)
 
 void isichazamazwi::on_btn_translate_clicked()
 {
-    //QString text = ui->textEdit->toPlainText();
-    QString src = ui->txt_source->text();
-    qDebug() << "Success-->" <<src;
-    QString dest =send_http_request(src);
-    parse_http(dest);
-    qDebug() << "Success-->" <<dest;
+       int type;
 
 
+       if(ui->rbtn_google->isChecked())
+           type = 0;
+       else if(ui->rbtn_yandex->isChecked())
+           type = 1;
+       else if (ui->rbtn_bing->isChecked())
+           type = 2;
+       else
+           type = -1;
 
+       QString src = ui->txt_source->text();
+
+       QString dest =send_http_request(src,type);
+
+       parse_http(dest);
+
+       ui->txt_destination->setText(QString::number(type));
 
 }
