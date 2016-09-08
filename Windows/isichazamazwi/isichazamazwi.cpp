@@ -8,6 +8,7 @@
 
 #include "isichazamazwi.h"
 #include "ui_isichazamazwi.h"
+#include "db_operations.h"
 
 isichazamazwi::isichazamazwi(QWidget *parent) :
     QMainWindow(parent,Qt::FramelessWindowHint | Qt::WindowSystemMenuHint),
@@ -69,6 +70,8 @@ QString parse_http(QString &src)
 
 void isichazamazwi::on_btn_translate_clicked()
 {
+
+       db_operations db("C:\Users\Kernel\Desktop\isichazamazwi.db");
        int type;
 
 

@@ -6,7 +6,7 @@
 
 QT       += core gui
 QT       += network
-
+QT       += sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = isichazamazwi
@@ -14,8 +14,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        isichazamazwi.cpp
+        isichazamazwi.cpp \
+    db_operations.cpp
 
-HEADERS  += isichazamazwi.h
+HEADERS  += isichazamazwi.h \
+    db_operations.h
 
 FORMS    += isichazamazwi.ui
