@@ -5,6 +5,7 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QUrlQuery>
+#include <QMessageBox>
 
 #include "isichazamazwi.h"
 #include "ui_isichazamazwi.h"
@@ -15,12 +16,20 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->rbtn_google->setChecked(true);
+    ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
+    ui->btn_save_it->setVisible(false);
 }
 
 isichazamazwi::~isichazamazwi()
 {
     delete ui;
 }
+void isichazamazwi::exit()
+{
+    close();
+    qApp->quit();
+}
+
 QString send_http_request(QString source,int type){
 
     QString ans;
@@ -80,8 +89,16 @@ void isichazamazwi::on_btn_translate_clicked()
 
     ui->txt_destination->setText(QString::number(type));
 
-
+    ui->btn_save_it->setVisible(true);
 
 
 }
 
+
+void isichazamazwi::on_btn_save_it_clicked()
+{
+    QMessageBox Msgbox;
+    Msgbox.setText("your word (...) added \nlocal dictionary!..");
+    Msgbox.setStandardButtons(QMessageBox::Ok);
+    Msgbox.exec();
+}

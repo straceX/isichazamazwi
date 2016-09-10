@@ -9,20 +9,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>413</width>
-    <height>123</height>
+    <width>410</width>
+    <height>117</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>413</width>
-    <height>123</height>
+    <width>410</width>
+    <height>117</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>413</width>
-    <height>123</height>
+    <width>410</width>
+    <height>117</height>
    </size>
   </property>
   <property name="contextMenuPolicy">
@@ -44,8 +44,8 @@
    <widget class="QPushButton" name="btn_translate">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>40</y>
+      <x>130</x>
+      <y>30</y>
       <width>75</width>
       <height>21</height>
      </rect>
@@ -53,12 +53,19 @@
     <property name="text">
      <string>Translate</string>
     </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../Files/ico.jpg</normaloff>../../Files/ico.jpg</iconset>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QLineEdit" name="txt_source">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
+      <x>10</x>
+      <y>30</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -70,8 +77,8 @@
    <widget class="QLineEdit" name="txt_destination">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>40</y>
+      <x>210</x>
+      <y>30</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -80,8 +87,8 @@
    <widget class="QRadioButton" name="rbtn_google">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>10</y>
+      <x>20</x>
+      <y>0</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -94,7 +101,7 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>10</y>
+      <y>0</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -106,8 +113,8 @@
    <widget class="QRadioButton" name="rbtn_bing">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>10</y>
+      <x>320</x>
+      <y>0</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -116,19 +123,32 @@
      <string>Bing</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_save_it">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>30</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save It</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>413</width>
+     <width>410</width>
      <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTranslator">
     <property name="title">
-     <string>Translator</string>
+     <string>Help</string>
     </property>
    </widget>
    <addaction name="menuTranslator"/>

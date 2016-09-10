@@ -17,10 +17,9 @@ public:
 
 private slots:
     void on_btn_translate_clicked();
+    void exit();
 
-    void on_txt_source_cursorPositionChanged(int arg1, int arg2);
-
-    void on_txt_source_textEdited(const QString &arg1);
+    void on_btn_save_it_clicked();
 
 private:
     Ui::isichazamazwi *ui;
