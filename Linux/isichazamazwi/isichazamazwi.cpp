@@ -10,6 +10,8 @@
 #include "isichazamazwi.h"
 #include "ui_isichazamazwi.h"
 
+#include "db_operations.h"
+
 isichazamazwi::isichazamazwi(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::isichazamazwi)
@@ -62,15 +64,14 @@ QString send_http_request(QString source,int type){
 }
 QString parse_http(QString &src)
 {
-    src = QString("...");
 
+    src = QString("...");
     return src;
 }
 
 void isichazamazwi::on_btn_translate_clicked()
 {
     int type;
-
 
     if(ui->rbtn_google->isChecked())
         type = 0;
@@ -81,15 +82,14 @@ void isichazamazwi::on_btn_translate_clicked()
     else
         type = -1;
 
+
     QString src = ui->txt_source->text();
-
     QString dest =send_http_request(src,type);
-
     parse_http(dest);
 
     ui->txt_destination->setText(QString::number(type));
-
     ui->btn_save_it->setVisible(true);
+    ui->btn_translate->setVisible(false);
 
 
 }
@@ -97,6 +97,8 @@ void isichazamazwi::on_btn_translate_clicked()
 
 void isichazamazwi::on_btn_save_it_clicked()
 {
+    //db_operations db("isichazamazwi.db");
+
     QMessageBox Msgbox;
     Msgbox.setText("your word (...) added \nlocal dictionary!..");
     Msgbox.setStandardButtons(QMessageBox::Ok);

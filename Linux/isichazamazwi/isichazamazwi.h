@@ -17,10 +17,8 @@ public:
 
 private slots:
     void on_btn_translate_clicked();
-    void exit();
-
     void on_btn_save_it_clicked();
-
+    void exit();
 private:
     Ui::isichazamazwi *ui;
 };
