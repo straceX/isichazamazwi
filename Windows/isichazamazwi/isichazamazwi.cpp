@@ -12,7 +12,7 @@
 #include "db_operations.h"
 
 isichazamazwi::isichazamazwi(QWidget *parent) :
-    QMainWindow(parent,Qt::FramelessWindowHint | Qt::WindowSystemMenuHint),
+    //QMainWindow(parent,Qt::FramelessWindowHint | Qt::WindowSystemMenuHint),
     ui(new Ui::isichazamazwi)
 {
     ui->setupUi(this);
@@ -103,4 +103,19 @@ void isichazamazwi::on_btn_save_it_clicked()
     Msgbox.setText("your word (...) added \nlocal dictionary!..");
     Msgbox.setStandardButtons(QMessageBox::Ok);
     Msgbox.exec();
+}
+
+void isichazamazwi::on_rbtn_google_clicked()
+{
+    ui->btn_save_it->setVisible(false);
+}
+
+void isichazamazwi::on_rbtn_yandex_clicked()
+{
+    ui->btn_save_it->setVisible(false);
+}
+
+void isichazamazwi::on_rbtn_bing_clicked()
+{
+    ui->btn_save_it->setVisible(false);
 }

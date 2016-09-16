@@ -9,19 +9,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
+    <width>333</width>
     <height>117</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>410</width>
+    <width>333</width>
     <height>117</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>410</width>
+    <width>333</width>
     <height>117</height>
    </size>
   </property>
@@ -100,7 +100,7 @@
    <widget class="QRadioButton" name="rbtn_yandex">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>130</x>
       <y>10</y>
       <width>82</width>
       <height>17</height>
@@ -113,7 +113,7 @@
    <widget class="QRadioButton" name="rbtn_bing">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>230</x>
       <y>10</y>
       <width>82</width>
       <height>17</height>
@@ -126,9 +126,9 @@
    <widget class="QPushButton" name="btn_save_it">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>130</x>
       <y>40</y>
-      <width>71</width>
+      <width>75</width>
       <height>21</height>
      </rect>
     </property>
@@ -142,7 +142,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>410</width>
+     <width>333</width>
      <height>21</height>
     </rect>
    </property>
