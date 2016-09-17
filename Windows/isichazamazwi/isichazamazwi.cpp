@@ -73,9 +73,7 @@ QString parse_http(QString &src)
 void isichazamazwi::on_btn_translate_clicked()
 {
 
-       db_operations db("isichazamazwi.db");
        int type;
-
 
        if(ui->rbtn_google->isChecked())
            type = 0;
@@ -99,8 +97,16 @@ void isichazamazwi::on_btn_translate_clicked()
 
 void isichazamazwi::on_btn_save_it_clicked()
 {
+    try {
+
+        db_operations db("isichazamazwi.db");
+        db.insert_word(ui->txt_source->text(),ui->txt_destination->text(),2);
+
+    } catch (...) {
+        return;
+    }
     QMessageBox Msgbox;
-    Msgbox.setText("your word (...) added \nlocal dictionary!..");
+    Msgbox.setText("your word ("+ ui->txt_source->text() + ") added \nlocal dictionary!..");
     Msgbox.setStandardButtons(QMessageBox::Ok);
     Msgbox.exec();
 }
