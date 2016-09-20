@@ -19,8 +19,10 @@ private slots:
     void on_btn_translate_clicked();
     void on_btn_save_it_clicked();
     void exit();
+    void offline();
 private:
     Ui::isichazamazwi *ui;
+    bool offlineMode= false;
 };
 
 #endif // ISICHAZAMAZWI_H

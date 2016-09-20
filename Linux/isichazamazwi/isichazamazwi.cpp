@@ -19,6 +19,7 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
     ui->setupUi(this);
     ui->rbtn_google->setChecked(true);
     ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
+    ui->menuTranslator->addAction(tr("Offline Mode"),this, SLOT(offline()));
     ui->btn_save_it->setVisible(false);
 }
 
@@ -30,6 +31,17 @@ void isichazamazwi::exit()
 {
     close();
     qApp->quit();
+}
+
+void isichazamazwi::offline()
+{
+    isichazamazwi::offlineMode = true;
+
+    QMessageBox Msgbox;
+    Msgbox.setText("your dictionary offline mode!..");
+    Msgbox.setStandardButtons(QMessageBox::Ok);
+    Msgbox.exec();
+
 }
 
 QString send_http_request(QString source,int type){
