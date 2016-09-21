@@ -33,15 +33,19 @@ void isichazamazwi::exit()
     qApp->quit();
 }
 
+void print_message_box(QString text)
+{
+    QMessageBox Msgbox;
+    Msgbox.setText(text);
+    Msgbox.setStandardButtons(QMessageBox::Ok);
+    Msgbox.exec();
+}
+
 void isichazamazwi::offline()
 {
     isichazamazwi::offlineMode = true;
 
-    QMessageBox Msgbox;
-    Msgbox.setText("your dictionary offline mode!..");
-    Msgbox.setStandardButtons(QMessageBox::Ok);
-    Msgbox.exec();
-
+    print_message_box("Your dictionary run offline mode!..");
 }
 
 QString send_http_request(QString source,int type){
@@ -74,6 +78,7 @@ QString send_http_request(QString source,int type){
     }
     return ans;
 }
+
 QString parse_http(QString &src)
 {
 
@@ -109,10 +114,16 @@ void isichazamazwi::on_btn_translate_clicked()
 
 void isichazamazwi::on_btn_save_it_clicked()
 {
-    //db_operations db("isichazamazwi.db");
+    try {
 
-    QMessageBox Msgbox;
-    Msgbox.setText("your word (...) added \nlocal dictionary!..");
-    Msgbox.setStandardButtons(QMessageBox::Ok);
-    Msgbox.exec();
+        db_operations db("isichazamazwi.db");
+        //db.insert_word(ui->txt_source->text(),ui->txt_destination->text(),2);
+
+    } catch (...) {
+        return;
+    }
+
+    print_message_box("your word ("+ ui->txt_source->text() + ") added \nlocal dictionary!..");
+
+
 }
