@@ -11,7 +11,7 @@ class db_operations
         db_operations(const QString& path);
         bool insert_word(const QString& src,const QString& dst,int type);
         bool update_word(const QString& src,const QString& dst,int type);
-        bool delete_word(const QString& src,const QString& dst,int type);
+        bool delete_word(const QString& src,int type);
     private:
 
         QSqlDatabase m_db;

@@ -81,8 +81,13 @@ QString send_http_request(QString source,int type){
 
 QString parse_http(QString &src)
 {
+    try {
+        src = QString("...");
 
-    src = QString("...");
+    } catch (...) {
+
+    }
+
     return src;
 }
 
