@@ -2,6 +2,7 @@
 #define DB_OPERATIONS_H
 
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QDebug>
 
 class db_operations

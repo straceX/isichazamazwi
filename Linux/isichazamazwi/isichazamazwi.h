@@ -20,6 +20,12 @@ private slots:
     void on_btn_save_it_clicked();
     void exit();
     void offline();
+    void on_rbtn_google_clicked();
+
+    void on_rbtn_yandex_clicked();
+
+    void on_rbtn_bing_clicked();
+
 private:
     Ui::isichazamazwi *ui;
     bool offlineMode= false;

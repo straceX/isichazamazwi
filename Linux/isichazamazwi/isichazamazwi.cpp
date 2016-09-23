@@ -117,7 +117,7 @@ void isichazamazwi::on_btn_save_it_clicked()
     try {
 
         db_operations db("isichazamazwi.db");
-        //db.insert_word(ui->txt_source->text(),ui->txt_destination->text(),2);
+        db.insert_word(ui->txt_source->text(),ui->txt_destination->text(),2);
 
     } catch (...) {
         return;
@@ -126,4 +126,22 @@ void isichazamazwi::on_btn_save_it_clicked()
     print_message_box("your word ("+ ui->txt_source->text() + ") added \nlocal dictionary!..");
 
 
+}
+
+void isichazamazwi::on_rbtn_google_clicked()
+{
+    ui->btn_save_it->setVisible(false);
+    ui->btn_translate->setVisible(true);
+}
+
+void isichazamazwi::on_rbtn_yandex_clicked()
+{
+    ui->btn_save_it->setVisible(false);
+    ui->btn_translate->setVisible(true);
+}
+
+void isichazamazwi::on_rbtn_bing_clicked()
+{
+    ui->btn_save_it->setVisible(false);
+    ui->btn_translate->setVisible(true);
 }
