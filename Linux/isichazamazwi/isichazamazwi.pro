@@ -16,9 +16,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         isichazamazwi.cpp \
-    db_operations.cpp
+    db_operations.cpp \
+    nt_operations.cpp
 
 HEADERS  += isichazamazwi.h \
-    db_operations.h
+    db_operations.h \
+    nt_operations.h
 
 FORMS    += isichazamazwi.ui
