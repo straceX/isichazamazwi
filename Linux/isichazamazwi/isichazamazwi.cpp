@@ -45,6 +45,9 @@ void isichazamazwi::offline()
 
     print_message_box("Your dictionary run offline mode!..");
 
+    QWidget::setWindowTitle("isichazamazwi (offline mode)");
+
+
 }
 
 
