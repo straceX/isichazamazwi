@@ -3,13 +3,19 @@
 
 #include <QMainWindow>
 
+#include <QSystemTrayIcon>
+#include <QIcon>
+#include <QMenu>
+
 namespace Ui {
 class isichazamazwi;
 }
 
 class isichazamazwi : public QMainWindow
 {
-    Q_OBJECT
+    Q_OBJECT    
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayMenu;
 
 public:
     explicit isichazamazwi(QWidget *parent = 0);
@@ -21,14 +27,13 @@ private slots:
     void exit();
     void offline();
     void on_rbtn_google_clicked();
-
     void on_rbtn_yandex_clicked();
-
     void on_rbtn_bing_clicked();
 
 private:
     Ui::isichazamazwi *ui;
     bool offlineMode= false;
+
 };
 
 #endif // ISICHAZAMAZWI_H
