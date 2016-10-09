@@ -28,9 +28,7 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
     trayIcon->setContextMenu(trayMenu);
 
     trayIcon->show();
-    trayIcon->showMessage("isichazamazwi", "Dictionary is started!..",QSystemTrayIcon::Information, 2510);
-
-    //ui->pushButton->setIcon(QIcon(":/ui_conf.png"));
+    trayIcon->showMessage("isichazamazwi", "Dictionary is started!..",QSystemTrayIcon::Information, 2510);    
 
 }
 
@@ -56,10 +54,8 @@ void isichazamazwi::offline()
 {
     isichazamazwi::offlineMode = true;
 
-    print_message_box("Your dictionary run offline mode!..");
-
+    trayIcon->showMessage("isichazamazwi", "Your dictionary run offline mode!..",QSystemTrayIcon::Information, 2510);
     QWidget::setWindowTitle("isichazamazwi (offline mode)");
-    //trayIcon->showMessage("Your dictionary run offline mode!..");
 
 }
 
