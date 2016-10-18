@@ -17,7 +17,7 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
     ui->setupUi(this);
     ui->rbtn_google->setChecked(true);
     ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
-    ui->menuTranslator->addAction(tr("Offline Mode"),this, SLOT(offline()));
+    ui->menuTranslator->addAction(tr("Offline|Online Mode"),this, SLOT(offline()));
     ui->btn_save_it->setVisible(false);
 
     trayMenu = new QMenu(this);
@@ -52,10 +52,18 @@ void print_message_box(QString text)
 
 void isichazamazwi::offline()
 {
-    isichazamazwi::offlineMode = true;
-
-    trayIcon->showMessage("isichazamazwi", "Your dictionary run offline mode!..",QSystemTrayIcon::Information, 2510);
-    QWidget::setWindowTitle("isichazamazwi (offline mode)");
+    if(!isichazamazwi::offlineMode)
+    {
+        isichazamazwi::offlineMode = true;
+        trayIcon->showMessage("isichazamazwi", "Your dictionary run offline mode!..",QSystemTrayIcon::Information, 2510);
+        QWidget::setWindowTitle("isichazamazwi (offline mode)");
+    }
+    else
+    {
+        isichazamazwi::offlineMode = false;
+        trayIcon->showMessage("isichazamazwi", "Your dictionary run online mode!..",QSystemTrayIcon::Information, 2510);
+        QWidget::setWindowTitle("isichazamazwi");
+    }
 
 }
 
