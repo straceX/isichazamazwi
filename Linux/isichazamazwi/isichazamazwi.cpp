@@ -33,6 +33,8 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
     trayIcon->show();
     trayIcon->showMessage("isichazamazwi", "Dictionary is started!..",QSystemTrayIcon::Information, 2510);    
 
+
+    isichazamazwi::setWindowIcon(QIcon("../../Files/try.png"));
 }
 
 isichazamazwi::~isichazamazwi()
@@ -121,10 +123,12 @@ void isichazamazwi::on_btn_save_it_clicked()
         db.insert_word(ui->txt_source->text(),ui->txt_destination->text(),2);
 
     } catch (...) {
+        print_message_box("isichazamazwi.db named database not found");
         return;
     }
 
     print_message_box("your word ("+ ui->txt_source->text() + ") added \nlocal dictionary!..");
+    return;
 
 
 }
@@ -133,16 +137,19 @@ void isichazamazwi::on_rbtn_google_clicked()
 {
     ui->btn_save_it->setVisible(false);
     ui->btn_translate->setVisible(true);
+    return;
 }
 
 void isichazamazwi::on_rbtn_yandex_clicked()
 {
     ui->btn_save_it->setVisible(false);
     ui->btn_translate->setVisible(true);
+    return;
 }
 
 void isichazamazwi::on_rbtn_bing_clicked()
 {
     ui->btn_save_it->setVisible(false);
     ui->btn_translate->setVisible(true);
+    return;
 }

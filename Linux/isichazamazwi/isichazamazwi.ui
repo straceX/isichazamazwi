@@ -55,7 +55,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../Files/ico.jpg</normaloff>../../Files/ico.jpg</iconset>
+      <normaloff>../../Files/try.png</normaloff>../../Files/try.png</iconset>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
