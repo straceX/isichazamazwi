@@ -31,6 +31,8 @@ private slots:
     void on_rbtn_yandex_clicked();
     void on_rbtn_bing_clicked();
 
+    void on_txt_source_textChanged(const QString &arg1);
+
 private:
     Ui::isichazamazwi *ui;
     bool offlineMode= false;

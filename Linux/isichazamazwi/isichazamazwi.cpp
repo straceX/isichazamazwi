@@ -80,7 +80,7 @@ void isichazamazwi::online()
 QString parse_http(QString &src)
 {
     try {
-        src = QString("...");
+        src = QString("Will be come");
 
     } catch (...) {
 
@@ -102,14 +102,23 @@ void isichazamazwi::on_btn_translate_clicked()
     else
         type = -1;
 
+    if(ui->txt_source->text().isEmpty())
+    {
+        print_message_box("Please insert word to translate");
+    }
+    else
+    {
+            QString src = ui->txt_source->text();
 
-    QString src = ui->txt_source->text();
-    QString dest =send_http_request(src,type);
-    parse_http(dest);
+            QString dest =send_http_request(src,type);
+            QString tmp = parse_http(dest);
 
-    ui->txt_destination->setText(QString::number(type));
-    ui->btn_save_it->setVisible(true);
-    ui->btn_translate->setVisible(false);
+            ui->txt_destination->setText(tmp);
+            ui->btn_save_it->setVisible(true);
+            ui->btn_translate->setVisible(false);
+    }
+
+
 
 
 }
@@ -128,6 +137,8 @@ void isichazamazwi::on_btn_save_it_clicked()
     }
 
     print_message_box("your word ("+ ui->txt_source->text() + ") added \nlocal dictionary!..");
+    ui->btn_save_it->setVisible(false);
+    ui->btn_translate->setVisible(true);
     return;
 
 
@@ -152,4 +163,10 @@ void isichazamazwi::on_rbtn_bing_clicked()
     ui->btn_save_it->setVisible(false);
     ui->btn_translate->setVisible(true);
     return;
+}
+
+void isichazamazwi::on_txt_source_textChanged(const QString &arg1)
+{
+    ui->btn_translate->setVisible(true);
+    ui->btn_save_it->setVisible(false);
 }
