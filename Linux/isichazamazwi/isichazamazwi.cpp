@@ -16,9 +16,9 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->rbtn_google->setChecked(true);
-    ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
     ui->menuTranslator->addAction(tr("Offline Mode"),this, SLOT(offline()));
     ui->menuTranslator->addAction(tr("Online Mode"),this, SLOT(online()));
+    ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
     ui->btn_save_it->setVisible(false);
 
     trayMenu = new QMenu(this);    
@@ -53,6 +53,7 @@ void print_message_box(QString text)
     Msgbox.setText(text);
     Msgbox.setStandardButtons(QMessageBox::Ok);
     Msgbox.exec();
+    return;
 }
 
 void isichazamazwi::offline()
@@ -62,6 +63,7 @@ void isichazamazwi::offline()
         isichazamazwi::offlineMode = true;
         trayIcon->showMessage("isichazamazwi", "Your dictionary run offline mode!..",QSystemTrayIcon::Information, 2510);
         QWidget::setWindowTitle("isichazamazwi (offline mode)");
+        return;
     }
 
 }
@@ -73,6 +75,7 @@ void isichazamazwi::online()
         isichazamazwi::offlineMode = false;
         trayIcon->showMessage("isichazamazwi", "Your dictionary run online mode!..",QSystemTrayIcon::Information, 2510);
         QWidget::setWindowTitle("isichazamazwi");
+        return;
     }
 
 }
@@ -102,13 +105,22 @@ void isichazamazwi::on_btn_translate_clicked()
     else
         type = -1;
 
-    if(ui->txt_source->text().isEmpty())
+    if(ui->txt_source->text().isEmpty() || ui->txt_source->text().length() < 2)
     {
         print_message_box("Please insert word to translate");
     }
     else
     {
-            QString src = ui->txt_source->text();
+        QString src = ui->txt_source->text();
+        QRegExp re("\\b([a-zA-Z]+[a-z]*)\\b");
+
+        if(!re.exactMatch(src))
+        {
+            print_message_box("Your word include non-alphanumeric characters!");
+            return;
+        }
+        else
+        {
 
             QString dest =send_http_request(src,type);
             QString tmp = parse_http(dest);
@@ -116,10 +128,9 @@ void isichazamazwi::on_btn_translate_clicked()
             ui->txt_destination->setText(tmp);
             ui->btn_save_it->setVisible(true);
             ui->btn_translate->setVisible(false);
+            return;
+        }
     }
-
-
-
 
 }
 
@@ -167,6 +178,8 @@ void isichazamazwi::on_rbtn_bing_clicked()
 
 void isichazamazwi::on_txt_source_textChanged(const QString &arg1)
 {
+    ui->txt_destination->clear();
     ui->btn_translate->setVisible(true);
     ui->btn_save_it->setVisible(false);
+    return;
 }
