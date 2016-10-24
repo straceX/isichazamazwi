@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 
+#include <QSystemTrayIcon>
+#include <QIcon>
+#include <QMenu>
+
 namespace Ui {
 class isichazamazwi;
 }
@@ -10,6 +14,8 @@ class isichazamazwi;
 class isichazamazwi : public QMainWindow
 {
     Q_OBJECT
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayMenu;
 
 public:
     explicit isichazamazwi(QWidget *parent = 0);
@@ -18,6 +24,8 @@ public:
 private slots:
     void on_btn_translate_clicked();
     void exit();
+    void offline();
+    void online();
 
     void on_btn_save_it_clicked();
 
@@ -29,6 +37,7 @@ private slots:
 
 private:
     Ui::isichazamazwi *ui;
+    bool offlineMode= false;
 };
 
 #endif // ISICHAZAMAZWI_H

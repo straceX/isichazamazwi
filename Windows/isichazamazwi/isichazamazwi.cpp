@@ -16,12 +16,26 @@ isichazamazwi::isichazamazwi(QWidget *parent) :
     ui(new Ui::isichazamazwi)
 {
     ui->setupUi(this);
-    ui->rbtn_google->setChecked(true);
+        ui->rbtn_google->setChecked(true);
+        ui->menuTranslator->addAction(tr("Offline Mode"),this, SLOT(offline()));
+        ui->menuTranslator->addAction(tr("Online Mode"),this, SLOT(online()));
+        ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
+        ui->btn_save_it->setVisible(false);
 
-    //ui->menuTranslator->addAction(tr("&Ask question"),this, SLOT(askQuestion()), tr("Alt+A"));
+        trayMenu = new QMenu(this);
+        trayMenu->addAction(tr("Offline Mode"),this, SLOT(offline()));
+        trayMenu->addAction(tr("Online Mode"),this, SLOT(online()));
+        trayMenu->addAction(tr("Exit"),this, SLOT(exit()));
 
-    ui->menuTranslator->addAction(tr("Exit"),this, SLOT(exit()), tr("Alt+F4"));
-    ui->btn_save_it->setVisible(false);
+        trayIcon = new QSystemTrayIcon(this);
+        trayIcon->setIcon(QIcon("../../Files/try.png"));
+        trayIcon->setContextMenu(trayMenu);
+
+        trayIcon->show();
+        trayIcon->showMessage("isichazamazwi", "Dictionary is started!..",QSystemTrayIcon::Information, 2510);
+
+
+        isichazamazwi::setWindowIcon(QIcon("../../Files/try.png"));
 }
 
 isichazamazwi::~isichazamazwi()
@@ -32,6 +46,14 @@ void isichazamazwi::exit()
 {
     close();
     qApp->quit();
+}
+void print_message_box(QString text)
+{
+    QMessageBox Msgbox;
+    Msgbox.setText(text);
+    Msgbox.setStandardButtons(QMessageBox::Ok);
+    Msgbox.exec();
+    return;
 }
 
 QString send_http_request(QString source,int type){
@@ -73,25 +95,43 @@ QString parse_http(QString &src)
 void isichazamazwi::on_btn_translate_clicked()
 {
 
-       int type;
+        int type;
 
-       if(ui->rbtn_google->isChecked())
-           type = 0;
-       else if(ui->rbtn_yandex->isChecked())
-           type = 1;
-       else if (ui->rbtn_bing->isChecked())
-           type = 2;
-       else
-           type = -1;
+        if(ui->rbtn_google->isChecked())
+            type = 0;
+        else if(ui->rbtn_yandex->isChecked())
+            type = 1;
+        else if (ui->rbtn_bing->isChecked())
+            type = 2;
+        else
+            type = -1;
 
-       QString src = ui->txt_source->text();
+        if(ui->txt_source->text().isEmpty() || ui->txt_source->text().length() < 2)
+        {
+            print_message_box("Please insert word to translate");
+        }
+        else
+        {
+            QString src = ui->txt_source->text();
+            QRegExp re("\\b([a-zA-Z]+[a-z]*)\\b");
 
-       QString dest =send_http_request(src,type);
+            if(!re.exactMatch(src))
+            {
+                print_message_box("Your word include non-alphanumeric characters!");
+                return;
+            }
+            else
+            {
 
-       parse_http(dest);
+                QString dest =send_http_request(src,type);
+                QString tmp = parse_http(dest);
 
-       ui->txt_destination->setText(QString::number(type));
-       ui->btn_save_it->setVisible(true);
+                ui->txt_destination->setText(tmp);
+                ui->btn_save_it->setVisible(true);
+                ui->btn_translate->setVisible(false);
+                return;
+            }
+        }
 
 }
 
@@ -124,4 +164,27 @@ void isichazamazwi::on_rbtn_yandex_clicked()
 void isichazamazwi::on_rbtn_bing_clicked()
 {
     ui->btn_save_it->setVisible(false);
+}
+void isichazamazwi::offline()
+{
+    if(!isichazamazwi::offlineMode)
+    {
+        isichazamazwi::offlineMode = true;
+        trayIcon->showMessage("isichazamazwi", "Your dictionary run offline mode!..",QSystemTrayIcon::Information, 2510);
+        QWidget::setWindowTitle("isichazamazwi (offline mode)");
+        return;
+    }
+
+}
+
+void isichazamazwi::online()
+{
+    if(isichazamazwi::offlineMode)
+    {
+        isichazamazwi::offlineMode = false;
+        trayIcon->showMessage("isichazamazwi", "Your dictionary run online mode!..",QSystemTrayIcon::Information, 2510);
+        QWidget::setWindowTitle("isichazamazwi");
+        return;
+    }
+
 }
