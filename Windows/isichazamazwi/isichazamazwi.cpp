@@ -10,6 +10,7 @@
 #include "isichazamazwi.h"
 #include "ui_isichazamazwi.h"
 #include "db_operations.h"
+#include "nt_operations.h"
 
 isichazamazwi::isichazamazwi(QWidget *parent) :
     //QMainWindow(parent,Qt::FramelessWindowHint | Qt::WindowSystemMenuHint),
@@ -56,36 +57,30 @@ void print_message_box(QString text)
     return;
 }
 
-QString send_http_request(QString source,int type){
-
-    QString ans;
-    //QString src = QString("http://tureng.com/tr/turkce-ingilizce/") + source;
-    //create custom temporary event loop on stack
-    QEventLoop eventLoop;
-
-    // "quit()" the event-loop, when the network request "finished()"
-    QNetworkAccessManager mgr;
-    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-
-    // the HTTP request
-    QNetworkRequest req( QUrl(QString("http://ceviri.yandex.com.tr/?text=merhaba&lang=tr-en"))  );
-    QNetworkReply *reply = mgr.get(req);
-    eventLoop.exec(); // blocks stack until "finished()" has been called
-
-    if (reply->error() == QNetworkReply::NoError) {
-        //success
-        //qDebug() << "Success" <<reply->readAll();
-        ans = reply->readAll();
-        delete reply;
+void isichazamazwi::offline()
+{
+    if(!isichazamazwi::offlineMode)
+    {
+        isichazamazwi::offlineMode = true;
+        trayIcon->showMessage("isichazamazwi", "Your dictionary run offline mode!..",QSystemTrayIcon::Information, 2510);
+        QWidget::setWindowTitle("isichazamazwi (offline mode)");
+        return;
     }
-    else {
-        //failure
-        //qDebug() << "Failure" <<reply->errorString();
-        ans = "";
-        delete reply;
-    }
-    return ans;
+
 }
+
+void isichazamazwi::online()
+{
+    if(isichazamazwi::offlineMode)
+    {
+        isichazamazwi::offlineMode = false;
+        trayIcon->showMessage("isichazamazwi", "Your dictionary run online mode!..",QSystemTrayIcon::Information, 2510);
+        QWidget::setWindowTitle("isichazamazwi");
+        return;
+    }
+
+}
+
 QString parse_http(QString &src)
 {
     src = QString("...");
@@ -165,26 +160,10 @@ void isichazamazwi::on_rbtn_bing_clicked()
 {
     ui->btn_save_it->setVisible(false);
 }
-void isichazamazwi::offline()
+void isichazamazwi::on_txt_source_textChanged(const QString &arg1)
 {
-    if(!isichazamazwi::offlineMode)
-    {
-        isichazamazwi::offlineMode = true;
-        trayIcon->showMessage("isichazamazwi", "Your dictionary run offline mode!..",QSystemTrayIcon::Information, 2510);
-        QWidget::setWindowTitle("isichazamazwi (offline mode)");
-        return;
-    }
-
-}
-
-void isichazamazwi::online()
-{
-    if(isichazamazwi::offlineMode)
-    {
-        isichazamazwi::offlineMode = false;
-        trayIcon->showMessage("isichazamazwi", "Your dictionary run online mode!..",QSystemTrayIcon::Information, 2510);
-        QWidget::setWindowTitle("isichazamazwi");
-        return;
-    }
-
+    ui->txt_destination->clear();
+    ui->btn_translate->setVisible(true);
+    ui->btn_save_it->setVisible(false);
+    return;
 }
